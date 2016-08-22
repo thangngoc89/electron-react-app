@@ -41,7 +41,7 @@ function checkIfCurrentWorkingDirectoryIsEmpty() {
 }
 
 function installReactTools() {
-  // Don't install react-app-tools in test mode
+  // Don't install electron-react-app-scripts in test mode
   if (process.env.TEST_SDK === 'true') {
     return Promise.resolve();
   }
@@ -56,7 +56,7 @@ function installReactTools() {
 
   return new Promise((resolve, reject) => {
     const tagMatch = pkg.version.match(/-([a-z]+)\./); // '1.0.0-beta.2' => 'beta'
-    const module = tagMatch ? `react-app-tools@${tagMatch[1]}` : 'react-app-tools';
+    const module = tagMatch ? `electron-react-app-scripts@${tagMatch[1]}` : 'electron-react-app-scripts';
     console.log(`Installing '${module}' from npm... This may take a couple minutes.`);
 
     const npm = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
@@ -79,7 +79,7 @@ function run(command) {
   }
   // eslint-disable-next-line global-require, import/no-unresolved
   return require(
-    path.resolve(process.cwd(), './node_modules/react-app-tools/run')
+    path.resolve(process.cwd(), './node_modules/electron-react-app-scripts/run')
   )(command);
 }
 
@@ -119,7 +119,7 @@ if (command === 'new') {
       // eslint-disable-next-line global-require
       ? require(path.resolve(__dirname, '../scripts/new'))()
       // eslint-disable-next-line global-require, import/no-unresolved
-      : require(path.resolve(process.cwd(), './node_modules/react-app-tools/scripts/new'))())
+      : require(path.resolve(process.cwd(), './node_modules/electron-react-app-scripts/scripts/new'))())
     )
     .catch(err => {
       console.error(process.argv.includes('--verbose') ? err.stack : `ERROR: ${err.message}`);
@@ -138,13 +138,13 @@ if (command === 'new') {
       process.exit(1);
     });
 } else {
-  console.log(' Usage: react-app <command> [options]');
+  console.log(' Usage: electron-react-app <command> [options]');
   console.log();
   console.log(' Commands:');
   console.log();
-  console.log('   new     - Scaffold a new JavaScript application project');
-  console.log('   build   - Compile JavaScript application with Webpack');
-  console.log('   run     - Compile and launch the app');
+  console.log('   new     - Scaffold a new Electron application project');
+  console.log('   build   - Compile React application with Webpack');
+  console.log('   start   - Compile and launch the app in development mode');
   console.log();
   console.log(' Options:');
   console.log();
@@ -162,5 +162,5 @@ if (command === 'new') {
   console.log();
   console.log(' For more information visit:');
   console.log();
-  console.log('   https://github.com/kriasoft/react-app');
+  console.log('   https://github.com/thangngoc89/electron-react-app');
 }
