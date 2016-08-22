@@ -77,7 +77,6 @@ function run(command) {
     // eslint-disable-next-line global-require
     return require(path.resolve(__dirname, '../run'))(command);
   }
-
   // eslint-disable-next-line global-require, import/no-unresolved
   return require(
     path.resolve(process.cwd(), './node_modules/react-app-tools/run')
@@ -133,19 +132,12 @@ if (command === 'new') {
       ? 'debug (non-optimized)' : 'release (optimized)'}, ` +
     `HMR: ${process.env.HMR === 'true' ? 'true' : 'false'}`
   );
-  run(command === 'start' ? 'run' : command)
+  run(command)
     .catch(err => {
       console.error(process.argv.includes('--verbose') ? err.stack : `ERROR: ${err.message}`);
       process.exit(1);
     });
 } else {
-  console.log('  ____                 _        _                  ____  ____  _  __');
-  console.log(' |  _ \\ ___  __ _  ___| |_     / \\   _ __  _ __   / ___||  _ \\| |/ /');
-  console.log(' | |_) / _ \\/ _` |/ __| __|   / _ \\ | \'_ \\| \'_ \\  \\___ \\| | | | \' /');
-  console.log(' |  _ <  __/ (_| | (__| |_   / ___ \\| |_) | |_) |  ___) | |_| | . \\');
-  console.log(' |_| \\_\\___|\\__,_|\\___|\\__| /_/   \\_\\ .__/| .__/  |____/|____/|_|\\_\\');
-  console.log('                                    |_|   |_|');
-  console.log();
   console.log(' Usage: react-app <command> [options]');
   console.log();
   console.log(' Commands:');
