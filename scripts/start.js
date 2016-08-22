@@ -28,17 +28,15 @@ module.exports = config => (
   new Promise(resolve => {
     let count = 0;
     const compiler = webpack(config.webpack);
-    compiler.plugin('invalid', () => {
-      console.log('Compiling...');
-    });
 
+    // Start electron after first complie
     compiler.plugin('done', () => {
-      // Start electron after first complie
       if (++count === 1) {
         console.log(chalk.cyan('Starting electron...'));
         openElectronApp();
       }
     });
+
     const Dashboard = require('webpack-dashboard');
     const DashboardPlugin = require('webpack-dashboard/plugin');
 
