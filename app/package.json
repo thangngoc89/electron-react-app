@@ -1,12 +1,9 @@
 {
-  "name": "react-app",
-  "version": "1.1.2",
-  "description": "Boilerplate and tooling for JavaScript application development with React",
-  "repository": "kriasoft/react-app",
-  "author": "Kriasoft <hello@kriasoft.com> (https://www.kriasoft.com)",
-  "contributors": [
-    "Konstantin Tarkus <hello@tarkus.me> (https://tarkus.me)"
-  ],
+  "name": "electron-react-app",
+  "version": "0.0.1",
+  "description": "Boilerplate and tooling for Electron application development with React",
+  "repository": "thangngoc89/electron-react-app",
+  "author": "Khoa Nguyen <hi@khoanguyen.me> (https://khoanguyen.me)",
   "license": "MIT",
   "keywords": [
     "react",
@@ -17,8 +14,8 @@
     "es2015",
     "jsx",
     "redux",
-    "browsersync",
-    "browser-sync",
+    "react-router",
+    "electron"
     "template",
     "templates",
     "boilerplate",
@@ -34,6 +31,6 @@
     "cli.js"
   ],
   "bin": {
-    "react-app": "./bin/react-app.js"
+    "electron-react-app": "./bin/electron-react-app.js"
   }
 }

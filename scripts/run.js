@@ -1,53 +1,75 @@
-/**
- * React App SDK (https://github.com/kriasoft/react-app)
- *
- * Copyright © 2015-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
-const fs = require('fs');
-const ejs = require('ejs');
 const webpack = require('webpack');
+const chalk = require('chalk');
+const { spawn } = require('child_process');
 
-module.exports = config => {
-  let count = 0;
-  return new Promise(resolve => {
-    const bs = require('browser-sync').create();
+function openElectronApp() {
+  const child = spawn('electron', ['./app/electron.main.js', '--enable-logs']);
+  const prefix = 'electron> ';
+  child.stdout.on('data', (data) => {
+    console.log(chalk.blue(
+      prefix + data.toString().replace(/\n$/g, '').split('\n').join(`\n ${prefix}`)
+    ));
+  });
+  child.stderr.on('data', (data) => {
+    console.error(chalk.red(
+      prefix + data.toString().replace(/\n$/g, '').split('\n').join(`\n ${prefix}`)
+    ));
+  });
+  child.on('close', (code) => {
+    console.log(chalk.yellow(`Electron exited with status ${code}`));
+    process.exit(code);
+  });
+  child.on('error', (error) => {
+    console.log(chalk.red(`Error launching electron:\n ${error}`));
+  });
+}
 
+module.exports = config => (
+  new Promise(resolve => {
+    let count = 0;
     const compiler = webpack(config.webpack);
-    // Node.js middleware that compiles application in watch mode with HMR support
-    // http://webpack.github.io/docs/webpack-dev-middleware.html
-    const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
-      publicPath: config.webpack.output.publicPath,
-      stats: config.webpack.stats,
+    compiler.plugin('invalid', () => {
+      console.log('Compiling...');
     });
 
-    compiler.plugin('done', stats => {
-      // Generate index.html page
-      const bundle = stats.compilation.chunks.find(x => x.name === 'main').files[0];
-      const template = fs.readFileSync('./index.ejs', 'utf8');
-      const render = ejs.compile(template, { filename: './index.ejs' });
-      const output = render({ debug: true, bundle: `/dist/${bundle}`, config: config.webpack });
-      fs.writeFileSync('./public/index.html', output, 'utf8');
-
-      // Launch Browsersync after the initial bundling is complete
-      // For more information visit https://browsersync.io/docs/options
+    compiler.plugin('done', () => {
+      // Start electron after first complie
       if (++count === 1) {
-        bs.init({
-          port: process.env.PORT || 3000,
-          ui: { port: Number(process.env.PORT || 3000) + 1 },
-          server: {
-            baseDir: 'public',
-            middleware: [
-              webpackDevMiddleware,
-              require('webpack-hot-middleware')(compiler),
-              require('connect-history-api-fallback')(),
-            ],
-          },
-        }, resolve);
+        console.log(chalk.cyan('Starting electron...'));
+        openElectronApp();
       }
     });
-  });
-};
+    const Dashboard = require('webpack-dashboard');
+    const DashboardPlugin = require('webpack-dashboard/plugin');
+
+    const dashboard = new Dashboard();
+    compiler.apply(new DashboardPlugin(dashboard.setData));
+
+    // Start dev server with webpack dev and hot middleware
+    const express = require('express');
+    const devMiddleware = require('webpack-dev-middleware');
+    const hotMiddleware = require('webpack-hot-middleware');
+
+    const server = express();
+    server.use(devMiddleware(compiler, {
+      publicPath: config.webpack.output.publicPath,
+      quiet: true,
+    }));
+
+    server.use(hotMiddleware(compiler, {
+      log: () => {},
+    }));
+
+    server.listen(3000, (err) => {
+      if (err) {
+        console.error(err);
+      }
+
+      console.log(chalk.cyan(
+        'Development server listening at http://localhost:3000/'
+      ));
+
+      resolve();
+    });
+  })
+);
