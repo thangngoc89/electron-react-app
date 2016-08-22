@@ -1,6 +1,6 @@
 {
   "name": "electron-react-app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Boilerplate and tooling for Electron application development with React",
   "repository": "thangngoc89/electron-react-app",
   "author": "Khoa Nguyen <hi@khoanguyen.me> (https://khoanguyen.me)",
