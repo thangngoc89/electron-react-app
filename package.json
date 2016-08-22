@@ -122,6 +122,6 @@
     "new-setup": "rm -rf temp && ln -s templates temp",
     "new": "node ./app/bin/electron-react-app new --test-sdk",
     "build": "node ./app/bin/electron-react-app build --test-sdk",
-    "start": "node ./app/bin/electron-react-app run --test-sdk"
+    "start": "node ./app/bin/electron-react-app start --test-sdk"
   }
 }

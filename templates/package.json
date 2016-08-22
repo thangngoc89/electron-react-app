@@ -48,6 +48,6 @@
   "scripts": {
     "lint": "eslint actions components core routes test utils main.js",
     "build": "electron-react-app build",
-    "start": "electron-react-app run"
+    "start": "electron-react-app start"
   }
 }
