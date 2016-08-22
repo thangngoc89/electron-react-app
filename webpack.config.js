@@ -2,6 +2,8 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const { tmpdir } = require('os');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 const pkg = require(path.resolve(process.cwd(), './package.json'));
 
@@ -25,7 +27,7 @@ const config = {
   entry: [
     './src/index.js',
   ],
-
+  recordsPath: path.resolve(tmpdir(), 'hswp/records.json'),
   // Options affecting the output of the compilation
   output: {
     path: path.resolve(process.cwd(), './app/dist/'),
@@ -60,6 +62,14 @@ const config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': debug ? '"development"' : '"production"',
       __DEV__: debug,
+    }),
+    new HardSourceWebpackPlugin({
+      cacheDirectory: path.resolve(tmpdir(), 'hswp/cache/'),
+      environmentPaths: {
+        root: process.cwd(),
+        directories: ['node_modules'],
+        files: ['package.json'],
+      },
     }),
   ],
 
