@@ -121,10 +121,6 @@ const config = {
         loader: 'json-loader',
       },
       {
-        test: /\.md$/,
-        loader: path.resolve(process.cwd(), './src/utils/markdown-loader.js'),
-      },
-      {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)(\?.*)$/,
         loader: 'url-loader?limit=10000',
       },
