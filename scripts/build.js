@@ -10,5 +10,5 @@
 const run = require('../run');
 
 module.exports = () => Promise.resolve()
-  .then(() => run('clean'))
+  .then(() => run('clean-dist'))
   .then(() => run('bundle'));

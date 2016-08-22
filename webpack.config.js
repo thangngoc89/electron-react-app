@@ -2,14 +2,16 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const { tmpdir } = require('os');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const findCacheDir = require('find-cache-dir');
 
 const pkg = require(path.resolve(process.cwd(), './package.json'));
 
 const debug = process.env.NODE_ENV === 'development';
 const verbose = process.env.VERBOSE === 'true';
 const hmr = process.env.HMR === 'true';
+
+const cacheDir = findCacheDir({ name: 'electron-react-app', thunk: true });
 
 const babelConfig = Object.assign({}, pkg.babel, {
   babelrc: false,
@@ -27,7 +29,7 @@ const config = {
   entry: [
     './src/index.js',
   ],
-  recordsPath: path.resolve(tmpdir(), 'hswp/records.json'),
+  recordsPath: cacheDir('hard-source-webpack-plugin/records.json'),
   // Options affecting the output of the compilation
   output: {
     path: path.resolve(process.cwd(), './app/dist/'),
@@ -64,7 +66,7 @@ const config = {
       __DEV__: debug,
     }),
     new HardSourceWebpackPlugin({
-      cacheDirectory: path.resolve(tmpdir(), 'hswp/cache/'),
+      cacheDirectory: cacheDir('hard-source-webpack-plugin/cache'),
       environmentPaths: {
         root: process.cwd(),
         directories: ['node_modules'],

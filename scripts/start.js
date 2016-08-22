@@ -37,12 +37,6 @@ module.exports = config => (
       }
     });
 
-    const Dashboard = require('webpack-dashboard');
-    const DashboardPlugin = require('webpack-dashboard/plugin');
-
-    const dashboard = new Dashboard();
-    compiler.apply(new DashboardPlugin(dashboard.setData));
-
     // Start dev server with webpack dev and hot middleware
     const express = require('express');
     const devMiddleware = require('webpack-dev-middleware');
@@ -51,7 +45,7 @@ module.exports = config => (
     const server = express();
     server.use(devMiddleware(compiler, {
       publicPath: config.webpack.output.publicPath,
-      quiet: true,
+      stats: config.webpack.stats,
     }));
 
     server.use(hotMiddleware(compiler, {
