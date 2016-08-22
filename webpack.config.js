@@ -41,7 +41,7 @@ const config = {
 
   // Developer tool to enhance debugging, source maps
   // http://webpack.github.io/docs/configuration.html#devtool
-  devtool: debug ? 'source-map' : false,
+  devtool: debug ? '#cheap-module-eval-source-map' : '#cheap-source-map',
 
   // What information should be printed to the console
   stats: {
