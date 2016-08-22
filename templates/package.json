@@ -16,7 +16,7 @@
     "redux": "^3.5.2"
   },
   "devDependencies": {
-    "electron-react-app-scripts": "^1.0.0"
+    "electron-react-app-scripts": "^0.0.1"
   },
   "babel": {
     "presets": [
@@ -47,7 +47,7 @@
   },
   "scripts": {
     "lint": "eslint actions components core routes test utils main.js",
-    "build": "react-app build",
-    "start": "react-app run"
+    "build": "electron-react-app build",
+    "start": "electron-react-app run"
   }
 }
