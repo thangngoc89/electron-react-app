@@ -4,9 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
-### Added
-
+## [0.0.3] - 2016-08-24
+### Changed
+- Use `find-cache-dir` folder instead of OS' temp folder
+- Clean up template
 
 ## [0.0.2] - 2016-08-23
 ### Changed
