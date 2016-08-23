@@ -88,13 +88,7 @@ const config = {
       {
         test: /\.jsx?$/,
         include: [
-          path.resolve(process.cwd(), './src/actions'),
-          path.resolve(process.cwd(), './src/components'),
-          path.resolve(process.cwd(), './src/core'),
-          path.resolve(process.cwd(), './src/pages'),
-          path.resolve(process.cwd(), './src/routes'),
-          path.resolve(process.cwd(), './src/App.js'),
-          path.resolve(process.cwd(), './src/index.js'),
+          path.resolve(process.cwd(), './src/'),
         ],
         loader: `babel-loader?${JSON.stringify(babelConfig)}`,
       },
