@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- [Webpack] Load global css with file extension `.global.css`
+
 ## [0.0.4] - 2016.08.24
 ### Changed
 - [Webpack] Babel loader was applied for all files in `src/folder`

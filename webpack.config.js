@@ -94,6 +94,7 @@ const config = {
       },
       {
         test: /\.css/,
+        exclude: /\.global\.css$/,
         loaders: [
           'style-loader',
           `css-loader?${JSON.stringify({
@@ -104,6 +105,14 @@ const config = {
             // CSS Nano http://cssnano.co/options/
             minimize: !debug,
           })}`,
+          'postcss-loader',
+        ],
+      },
+      {
+        test: /\.global\.css$/,
+        loaders: [
+          'style-loader',
+          'css-loader',
           'postcss-loader',
         ],
       },
