@@ -1,5 +1,11 @@
 {
   "private": true,
+  "name": "electronreactapp",
+  "version": "0.0.4",
+  "description": "Boilerplate and tooling for Electron application development with React",
+  "author": "Khoa Nguyen <hi@khoanguyen.me> (https://khoanguyen.me)",
+  "homepage": "https://github.com/thangngoc89/electron-react-app",
+  "repository": "https://github.com/thangngoc89/electron-react-app",
   "main": "electron.main.js",
   "dependencies": {
   }

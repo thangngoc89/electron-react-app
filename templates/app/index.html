@@ -11,7 +11,7 @@
     <script>
       {
         const script = document.createElement('script');
-        script.src = (process.env.HMR) ? `http://localhost:3000/app/main.js` : './app/dist/main.js';
+        script.src = (process.env.HMR) ? `http://localhost:3000/app/main.js` : './dist/main.js';
         document.write(script.outerHTML);
       }
     </script>

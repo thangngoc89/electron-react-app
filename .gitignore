@@ -10,3 +10,7 @@ tools/npm-debug.log
 
 # Misc
 temp
+
+# template (copy)
+templates/app/dist
+templates/dist

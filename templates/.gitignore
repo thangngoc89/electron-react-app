@@ -4,6 +4,9 @@
 # Compiled output
 app/dist
 
+# Program build output
+dist
+
 # Node.js and NPM
 node_modules
 npm-debug.log

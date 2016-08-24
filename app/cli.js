@@ -56,7 +56,9 @@ function installReactTools() {
 
   return new Promise((resolve, reject) => {
     const tagMatch = pkg.version.match(/-([a-z]+)\./); // '1.0.0-beta.2' => 'beta'
-    const module = tagMatch ? `electron-react-app-scripts@${tagMatch[1]}` : 'electron-react-app-scripts';
+    const module = tagMatch
+      ? `electron-react-app-scripts@${tagMatch[1]}`
+      : 'electron-react-app-scripts';
     console.log(`Installing '${module}' from npm... This may take a couple minutes.`);
 
     const npm = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
@@ -119,7 +121,10 @@ if (command === 'new') {
       // eslint-disable-next-line global-require
       ? require(path.resolve(__dirname, '../scripts/new'))()
       // eslint-disable-next-line global-require, import/no-unresolved
-      : require(path.resolve(process.cwd(), './node_modules/electron-react-app-scripts/scripts/new'))())
+      : require(path.resolve(
+          process.cwd(),
+          './node_modules/electron-react-app-scripts/scripts/new')
+        )())
     )
     .catch(err => {
       console.error(process.argv.includes('--verbose') ? err.stack : `ERROR: ${err.message}`);
