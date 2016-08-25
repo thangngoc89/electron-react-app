@@ -70,7 +70,7 @@ const config = {
       environmentPaths: {
         root: process.cwd(),
         directories: ['node_modules'],
-        files: ['package.json'],
+        files: ['package.json', 'config.js', __filename],
       },
     }),
   ],
