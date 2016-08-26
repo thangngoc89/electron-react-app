@@ -11,7 +11,10 @@ const debug = process.env.NODE_ENV === 'development';
 const verbose = process.env.VERBOSE === 'true';
 const hmr = process.env.HMR === 'true';
 
-const cacheDir = findCacheDir({ name: 'electron-react-app', thunk: true });
+const cacheDir = findCacheDir({
+  name: `electron-react-app/${debug ? 'dev' : 'prod'}`,
+  thunk: true,
+});
 
 const babelConfig = Object.assign({}, pkg.babel, {
   babelrc: false,

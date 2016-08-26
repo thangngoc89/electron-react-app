@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.8] - 2016.08.26
+### Changed
+- [Webpack] HardSourceWebpackPlugin uses different cache folder for dev and prod mode
+
 ## [0.0.7] - 2016.08.25
 ### Changed
 - [Webpack] HardSourceWebpackPlugin's cache should be invalided if `config.js`
